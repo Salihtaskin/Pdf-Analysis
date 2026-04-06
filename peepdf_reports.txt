@@ -1,0 +1,70 @@
+=== PDF STATIC ANALYSIS REPORT ===
+
+File: evil.pdf
+SHA256: 3e16f920211e88d6540e4239c53e5080a347763fe6faed82004c9c4819eb193d
+Size: 3052 bytes
+Objects: 12
+Streams: 2
+
+----------------------------------------
+[+] Suspicious Elements Detected
+----------------------------------------
+
+/OpenAction → Present
+/AA → Present
+/JS → Present
+/JavaScript → Present
+/Launch → Present
+/EmbeddedFiles → Present
+
+----------------------------------------
+[+] JavaScript Analysis (Object 9)
+----------------------------------------
+
+Code:
+this.exportDataObject({ cName: "template", nLaunch: 0 });
+
+Description:
+This JavaScript extracts an embedded file from the PDF.
+It is commonly used in malicious PDFs to drop payloads.
+
+----------------------------------------
+[+] Launch Action Analysis (Object 10)
+----------------------------------------
+
+Command:
+cmd.exe /Q /C ...
+
+Description:
+This action attempts to execute a Windows command using cmd.exe.
+It navigates through user directories and attempts to open a file.
+
+Risk:
+CRITICAL — Command Execution Capability
+
+----------------------------------------
+[+] Embedded File Analysis
+----------------------------------------
+
+Extracted File:
+template_payload.bin
+
+File Type:
+PE32+ executable (Windows x86-64)
+
+Description:
+The PDF contains an embedded executable file.
+This indicates that the PDF acts as a dropper.
+
+----------------------------------------
+[+] Conclusion
+----------------------------------------
+
+The analyzed PDF contains multiple malicious indicators:
+- Automatic execution via OpenAction
+- Embedded JavaScript for payload extraction
+- Launch action enabling command execution
+- Embedded Windows executable payload
+
+Final Assessment:
+HIGH RISK — MALICIOUS PDF (DROPPER)
