@@ -1,16 +1,24 @@
-# Python cache
+
+# Python
 __pycache__/
 *.pyc
+.venv/
+venv/
 
-# Logs
-*.log
+# Env
+.env
 
-# Temp files
-*.tmp
+# Reports / outputs
+reports/
+*.json
+*.csv
 
-# OS files
+# OS / editor
 .DS_Store
-
-# Editor
 .vscode/
 .idea/
+
+# Test / cache
+.pytest_cache/
+.coverage
+htmlcov/
